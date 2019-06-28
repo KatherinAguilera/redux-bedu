@@ -1,100 +1,20 @@
-import React, { Component } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Menu from './Menu';
+import Usuarios from './usuarios';
 
+const Prueba = () => <div>hola</div>
 
-class App extends Component {
-  // state
-	constructor() {
-		super();
-		this.state = {
-			usuarios: []
-		}
-  }
-  // ciclo de vida despues del render = componentDidMount
-  // Peticion hecha con axios
-  async componentDidMount() {
-    const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
-    // console.log('Los datos son', respuesta.data);
-    this.setState({
-      // accediento a la data del json
-      usuarios: respuesta.data
-    })
-  }
-  // traer el estado y acceder a la informacion - iterar elementos
-	ponerFilas = () => this.state.usuarios.map((usuario) => (
-		<tr key= {usuario.id}>
-			<td>
-				{ usuario.name }
-			</td>
-			<td>
-				{ usuario.email }
-			</td>
-			<td>
-				{ usuario.website }
-			</td>
-		</tr>
-	));
-
-	render() {
-    console.log(this.state.usuarios);
-		return (
-			<div className="margen">
-				<table className="tabla">
-					<thead>
-            <tr>
-              <th>
-                Nombre
-              </th>
-              <th>
-                Correo
-              </th>
-              <th>
-                Enlace
-              </th>
-            </tr>
-					</thead>
-					<tbody>
-						{ this.ponerFilas() }
-					</tbody>
-				</table>
-			</div>
-		)
-	}
-};
+const App = (props) => (
+	<BrowserRouter>
+		<Menu />
+		<div id="margen">
+    <Switch>
+			<Route exact path='/' component={Usuarios} />
+			<Route exact path='/tareas' component={Prueba} />
+    </Switch>
+		</div>
+	</BrowserRouter>
+);
 
 export default App;
-
-
-// import React, { useState } from"react";
-
-// const App = () => {
-//   const [usuarios, setUsuarios] = useState([
-//     { name: "Rodolfo", email: "Rodolfo@saldivar.com", enlace: "Rodolfo.com" },
-//     { name: "Platzi", email: "platzi@platzi.com", enlace: "platzi.com" }
-//   ]);
-
-//   return (
-//     <divclassName="margen">
-//       <tableclassName="tabla">
-//         <thead>
-//           <tr>
-//             <th>Nombre</th>
-//             <th>Correo</th>
-//             <th>Enlace</th>
-//           </tr>
-//         </thead>
-//         <tbody>
-//           {usuarios.map(item => (
-//             <tr>
-//               <td>{item.name}</td>
-//               <td>{item.email}</td>
-//               <td>{item.enlace}</td>
-//             </tr>
-//           ))}
-//         </tbody>
-//       </table>
-//     </div>
-//   );
-// };
-
-// exportdefault App;
