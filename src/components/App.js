@@ -14,38 +14,23 @@ class App extends Component {
   // Peticion hecha con axios
   async componentDidMount() {
     const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
-    console.log('Los datos son', respuesta);
+    // console.log('Los datos son', respuesta.data);
     this.setState({
-      usuarios: [
-				{
-					nombre: 'Luna',
-					correo: 'luna@platzi.com',
-					enlace: 'luna.com'
-				},
-				{
-					nombre: 'Haru',
-					correo: 'haru@platzi.com',
-					enlace: 'haru.com'
-				},
-				{
-					nombre: 'Winny',
-					correo: 'winny@platzi.com',
-					enlace: 'winny.com'
-				}
-			]
+      // accediento a la data del json
+      usuarios: respuesta.data
     })
   }
   // traer el estado y acceder a la informacion - iterar elementos
 	ponerFilas = () => this.state.usuarios.map((usuario) => (
-		<tr>
+		<tr key= {usuario.id}>
 			<td>
-				{ usuario.nombre }
+				{ usuario.name }
 			</td>
 			<td>
-				{ usuario.correo }
+				{ usuario.email }
 			</td>
 			<td>
-				{ usuario.enlace }
+				{ usuario.website }
 			</td>
 		</tr>
 	));
@@ -56,15 +41,17 @@ class App extends Component {
 			<div className="margen">
 				<table className="tabla">
 					<thead>
-						<th>
-							Nombre
-						</th>
-						<th>
-							Correo
-						</th>
-						<th>
-							Enlace
-						</th>
+            <tr>
+              <th>
+                Nombre
+              </th>
+              <th>
+                Correo
+              </th>
+              <th>
+                Enlace
+              </th>
+            </tr>
 					</thead>
 					<tbody>
 						{ this.ponerFilas() }
