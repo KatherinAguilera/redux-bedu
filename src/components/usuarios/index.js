@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
  class Usuarios extends Component {
-	constructor() {
-		super();
-		this.state = {
-			usuarios: []
-		}
-	}
 
- 	async componentDidMount() {
-		const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
-		this.setState({
-			usuarios: respuesta.data
-		});
-	}
+ 	// async componentDidMount() {
+	// 	const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
+	// 	this.setState({
+	// 		usuarios: respuesta.data
+	// 	});
+	// }
 
- 	ponerFilas = () => this.state.usuarios.map((usuario) => (
+ 	ponerFilas = () => this.props.usuarios.map((usuario) => (
 		<tr key={ usuario.id }>
 			<td>
 				{ usuario.name }
@@ -55,5 +50,9 @@ import axios from 'axios';
 		)
 	}
 };
-
- export default Usuarios; 
+// Mapea el estado de redux a los props del componente llamando a los reducers que te interesen usar, en este caso para mi fue usersReducer
+const mapStateToProps = (reducers) => {
+	return reducers.usuariosReducer;
+};
+// Exporta tu componente usando el método connect para tenerlo conectado a los reducers y actions de Redux.
+export default connect(mapStateToProps, {/*Accion Creator*/})(Usuarios); 
