@@ -6,7 +6,7 @@ import * as usuariosActions from '../../actions/usuariosActions';
 
 class Usuarios extends Component {
 
-async componentDidMount() {
+ componentDidMount() {
 		// const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
 		// this.setState({
 		// 	usuarios: respuesta.data
