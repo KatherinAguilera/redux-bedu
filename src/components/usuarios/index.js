@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { connect } from 'react-redux';
+import * as usuariosActions from '../../actions/usuariosActions';
 
- class Usuarios extends Component {
 
- 	// async componentDidMount() {
-	// 	const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
-	// 	this.setState({
-	// 		usuarios: respuesta.data
-	// 	});
-	// }
+class Usuarios extends Component {
 
- 	ponerFilas = () => this.props.usuarios.map((usuario) => (
+async componentDidMount() {
+		// const respuesta = await axios.get('https://jsonplaceholder.typicode.com/users');
+		// this.setState({
+		// 	usuarios: respuesta.data
+		// });
+		this.props.traerTodos();
+	}
+
+ponerFilas = () => this.props.usuarios.map((usuario) => (
 		<tr key={ usuario.id }>
 			<td>
 				{ usuario.name }
@@ -26,6 +29,7 @@ import { connect } from 'react-redux';
 	));
 
  	render() {
+		console.log(this.props);
 		return (
 			<div>
 				<table className="tabla">
@@ -55,4 +59,4 @@ const mapStateToProps = (reducers) => {
 	return reducers.usuariosReducer;
 };
 // Exporta tu componente usando el método connect para tenerlo conectado a los reducers y actions de Redux.
-export default connect(mapStateToProps, {/*Accion Creator*/})(Usuarios); 
+export default connect(mapStateToProps, usuariosActions)(Usuarios);
