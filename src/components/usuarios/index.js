@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 // import axios from 'axios';
 import { connect } from 'react-redux';
 import Spinner from '../General/Spinner';
+import Fatal from '../General/Fatal';
 
 import * as usuariosActions from '../../actions/usuariosActions';
 
@@ -15,10 +16,13 @@ componentDidMount() {
 		// });
 		this.props.traerTodos();
 	}
-
+	// Spinner
 	ponerContenido = () => {
 		if (this.props.cargando) {
 			return <Spinner />;
+		}
+		if (this.props.error) {
+			return <Fatal mensaje={ this.props.error } />;
 		}
 
 		return (
