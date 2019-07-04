@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
- const Tabla = (props) => {
+const Tabla = (props) => {
 
- 	const ponerFilas = () => props.usuarios.map((usuario) => (
+	const ponerFilas = () => props.usuarios.map((usuario, key) => (
 		<tr key={ usuario.id }>
 			<td>
 				{ usuario.name }
@@ -14,10 +15,15 @@ import { connect } from 'react-redux';
 			<td>
 				{ usuario.website }
 			</td>
+			<td>
+				<Link to={ `/publicaciones/${key}` }>
+					<div className="eye-solid icon"></div>
+				</Link>
+			</td>
 		</tr>
 	));
 
- 	return (
+	return (
 		<table className="tabla">
 			<thead>
 				<tr>
